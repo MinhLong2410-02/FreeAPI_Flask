@@ -115,10 +115,12 @@ class VinamilkName(Resource):
             'status': 'success',
             'url': generate_vinamilk_img(name, args['ltext'], args['rtext'])
         }
-
+@app.route('/')
+def home():
+    return "<h1>I'm alive</h1>"
 
 api.add_resource(Draw, '/v0.5/<int:model_type>')
 api.add_resource(VinamilkName, '/v0.5/vinamilk')
-api.add_resource(Introduce, '/')
+api.add_resource(Introduce, '/v0.5/introduce')
 
 
