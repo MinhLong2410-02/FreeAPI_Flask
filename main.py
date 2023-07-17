@@ -119,8 +119,8 @@ class VinamilkName(Resource):
 def home():
     return render_template('navbar.html')
 
-api.add_resource(Draw, 'api/v0.5/<int:model_type>')
-api.add_resource(VinamilkName, 'api/v0.5/vinamilk')
-api.add_resource(Introduce, 'api/v0.5/models')
+api.add_resource(Draw, '/api/v0.5/<int:model_type>')
+api.add_resource(VinamilkName, '/api/v0.5/vinamilk')
+api.add_resource(Introduce, '/api/v0.5/models')
 
 
