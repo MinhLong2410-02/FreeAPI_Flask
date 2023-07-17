@@ -121,5 +121,4 @@ api.add_resource(Draw, '/v0.5/<int:model_type>')
 api.add_resource(VinamilkName, '/v0.5/vinamilk')
 api.add_resource(Introduce, '/')
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8001, threaded=True)
+
