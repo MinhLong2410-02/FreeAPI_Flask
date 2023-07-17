@@ -1,0 +1,36 @@
+*{
+    padding: 0px;
+    margin: 0;
+}
+
+.navbar {
+    background-color: rgb(25, 106, 68);
+    color: #fff
+}
+.navbar .nav-link{
+    color: #fff
+}
+.navbar-text{
+    color: greenyellow;
+}
+
+.navbar-brand{
+    font-size: 2.5rem;
+    color: #fff !important;
+    width: 100%
+    /* font-family: ; */
+}
+
+.navbar .btn-custom{
+    color: #fff
+}
+
+/* .navbar-brand:hover{
+    color: rgb(250, 250, 250);
+} */
+
+.site-header-logo h1{
+    color: rgb(39, 147, 248);
+    font-size: 3rem;
+    margin-top: 2rem;
+}

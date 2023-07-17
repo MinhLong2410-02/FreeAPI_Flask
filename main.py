@@ -1,6 +1,6 @@
 import requests
 import json
-from flask import Flask
+from flask import Flask, render_template, url_for
 from flask_restful import reqparse, abort, Api, Resource
 import os
 from helpers.text2img import draw
@@ -117,10 +117,10 @@ class VinamilkName(Resource):
         }
 @app.route('/')
 def home():
-    return "<h1>I'm alive</h1>"
+    return render_template('navbar.html')
 
 api.add_resource(Draw, '/v0.5/<int:model_type>')
 api.add_resource(VinamilkName, '/v0.5/vinamilk')
-api.add_resource(Introduce, '/v0.5/introduce')
+api.add_resource(Introduce, '/v0.5/models')
 
 

@@ -2,18 +2,23 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from time import sleep
+from selenium.webdriver.chrome.service import Service
+
 from bs4 import BeautifulSoup as bs
 import urllib
 
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.add_argument('--headless')
+
 
 
 def generate_vinamilk_img(name, left, right):
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     driver.get('https://taoanhdep.com/tao-avatar-logo-vinamilk-est-1976/')
     script = f'''
     document.querySelector('.tad-in-text1').value = '{name}';
