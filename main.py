@@ -37,24 +37,28 @@ class Draw(Resource):
         if model_type not in [1, 2, 3, 4, 5, 6, 7]:
             return {'status': 'error', 'message': 'Model không tồn tại'}, 400
         if model_type == 1:
-            model_id = os.environ['MIDJOURNEY']
+            model_id = 'midjourney'
         elif model_type == 2:
-            model_id = os.environ['CYBER_COLOSCK']
+            model_id = 'anything-v3'
         elif model_type == 3:
-            model_id = os.environ['ULTRA']
+            model_id = 'anything-v3'
         elif model_type == 4:
-            model_id = os.environ['STABLE-DIFFUSION']
+            model_id = 'realistic-vision-v13'
+        elif model_id == 5:
+            model_id = 'dream-shaper-8797'
         elif model_type == 6:
-            model_id = os.environ['COUNTERFEIT']
+            model_id = 'counterfeit-v25'
         elif model_type == 7:
             model_id = 'meinamix'
-        else:
-            model_id = os.environ['ULTIMATEJOURNEY']
         args = self.parser.parse_args()
         key = args['key']
-
+        if key != 'heorung':
+            return {
+                'status': 'error',
+                'problem': f'{key} này vớ vẩn, không tồn tại'
+            }, 400
        
-        return draw(args['prompt'], model_id, args['height'], args['width'])
+        return draw(args['prompt'], model_id, args['height'], args['width']), 200
 
 
 class Introduce(Resource):
