@@ -1,3 +1,9 @@
+from gevent import monkey
+
+monkey.patch_all()
+from gevent.pywsgi import WSGIServer
+from flask_compress import Compress
+
 import requests
 import json
 from flask import Flask, render_template, url_for
@@ -7,6 +13,8 @@ from helpers.text2img import draw
 from helpers.vinamilk import generate_vinamilk_img
 # Vãi cả soi ạ =)))))))))))
 app = Flask(__name__)
+compress = Compress()
+compress.init_app(app)
 api = Api(app)
 
 
@@ -44,7 +52,7 @@ class Draw(Resource):
             model_id = 'anything-v3'
         elif model_type == 4:
             model_id = 'realistic-vision-v13'
-        elif model_id == 5:
+        elif model_type == 5:
             model_id = 'dream-shaper-8797'
         elif model_type == 6:
             model_id = 'counterfeit-v25'
@@ -57,8 +65,9 @@ class Draw(Resource):
                 'status': 'error',
                 'problem': f'{key} này vớ vẩn, không tồn tại'
             }, 400
-       
-        return draw(args['prompt'], model_id, args['height'], args['width']), 200
+
+        return draw(args['prompt'], model_id, args['height'],
+                    args['width']), 200
 
 
 class Introduce(Resource):
@@ -119,12 +128,20 @@ class VinamilkName(Resource):
             'status': 'success',
             'url': generate_vinamilk_img(name, args['ltext'], args['rtext'])
         }
+
+
 @app.route('/')
 def home():
     return render_template('navbar.html')
+
 
 api.add_resource(Draw, '/api/v0.5/<int:model_type>')
 api.add_resource(VinamilkName, '/api/v0.5/vinamilk')
 api.add_resource(Introduce, '/api/v0.5/models')
 
-
+if __name__ == '__main__':
+    # Create WSGI server with params for Repl.it (IP 0.0.0.0, port 8080)
+    # for our Flask app
+    http_server = WSGIServer(('0.0.0.0', 8080), app)
+    # Start WSGI server
+    http_server.serve_forever()
