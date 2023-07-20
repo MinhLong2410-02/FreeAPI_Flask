@@ -49,7 +49,7 @@ class Draw(Resource):
         elif model_type == 2:
             model_id = 'anything-v3'
         elif model_type == 3:
-            model_id = 'anything-v3'
+            model_id = 'anything-v5'
         elif model_type == 4:
             model_id = 'realistic-vision-v13'
         elif model_type == 5:
@@ -143,5 +143,6 @@ if __name__ == '__main__':
     # Create WSGI server with params for Repl.it (IP 0.0.0.0, port 8080)
     # for our Flask app
     http_server = WSGIServer(('0.0.0.0', 8080), app)
-    # Start WSGI server
     http_server.serve_forever()
+
+    
